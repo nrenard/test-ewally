@@ -3,7 +3,7 @@
  * https://jestjs.io/docs/en/configuration.html
  */
 
-export default {
+const config: any = {
   roots: ['<rootDir>/src'],
 
   clearMocks: true,
@@ -29,3 +29,5 @@ export default {
     '.+\\.ts$': 'ts-jest'
   }
 }
+
+export default config
