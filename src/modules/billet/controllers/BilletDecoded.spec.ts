@@ -1,6 +1,6 @@
 import { IHttpResponse } from '@/@types/protocols'
 
-import { badRequest, serverError } from '@/shared'
+import { badRequest, serverError, ok } from '@/shared'
 
 import BilletDecoded from './BilletDecoded'
 
@@ -16,30 +16,30 @@ const responseMockMount = (): any => ({
   adaptorResponse: (value: IHttpResponse) => value
 })
 
-// interface SutTypes {
-//   sut: BilletDecoded
-//   validateBillet: () => any
-// }
+interface SutTypes {
+  sut: BilletDecoded
+  validateBillet: () => any
+}
 
-// const makeSut = (): SutTypes => {
-//   const validateBillet = () => true
+const makeSut = (): SutTypes => {
+  const validateBillet = () => true
 
-//   const sut = new BilletDecoded({ validateBillet })
+  const sut = new BilletDecoded({ validateBillet })
 
-//   return {
-//     sut,
-//     validateBillet
-//   }
-// }
+  return {
+    sut,
+    validateBillet
+  }
+}
 
 describe('BilletDecoded Controller', () => {
-  // test('Should call Validation with correct value', async () => {
-  //   const { sut } = makeSut()
+  test('Should call Validation with correct value', async () => {
+    const { sut } = makeSut()
 
-  //   const response = await sut.handle(requestMockMount(), responseMockMount())
+    const response = await sut.handle(requestMockMount(), responseMockMount())
 
-  //   expect(response).toMatchObject(ok('ok'))
-  // })
+    expect(response).toMatchObject(ok('ok'))
+  })
 
   test('Should call Validation with incorrect value', async () => {
     const validateBillet = () => false
