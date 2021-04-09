@@ -1,6 +1,6 @@
 import { IHttpResponse } from '@/@types/protocols'
 
-import { badRequest } from '@/shared'
+import { badRequest, serverError } from '@/shared'
 
 import BilletDecoded from './BilletDecoded'
 
@@ -16,38 +16,48 @@ const responseMockMount = (): any => ({
   adaptorResponse: (value: IHttpResponse) => value
 })
 
-interface SutTypes {
-  sut: BilletDecoded
-  validateBillet: () => void
-}
+// interface SutTypes {
+//   sut: BilletDecoded
+//   validateBillet: () => any
+// }
 
-const makeSut = (): SutTypes => {
-  const validateBillet = () => {}
+// const makeSut = (): SutTypes => {
+//   const validateBillet = () => true
 
-  const sut = new BilletDecoded({ validateBillet })
+//   const sut = new BilletDecoded({ validateBillet })
 
-  return {
-    sut,
-    validateBillet
-  }
-}
+//   return {
+//     sut,
+//     validateBillet
+//   }
+// }
 
 describe('BilletDecoded Controller', () => {
   // test('Should call Validation with correct value', async () => {
   //   const { sut } = makeSut()
 
-  //   const response = await sut.handle(requestMock, responseMock)
+  //   const response = await sut.handle(requestMockMount(), responseMockMount())
 
-  //   expect(response).toBe({ message: 'ok' })
+  //   expect(response).toMatchObject(ok('ok'))
   // })
 
   test('Should call Validation with incorrect value', async () => {
-    const { sut } = makeSut()
+    const validateBillet = () => false
 
-    const requestMock = { ...requestMockMount(), params: { code: '3131312' } }
+    const sut = new BilletDecoded({ validateBillet })
 
-    const response = await sut.handle(requestMock, responseMockMount())
+    const response = await sut.handle(requestMockMount(), responseMockMount())
 
     expect(response).toMatchObject(badRequest('Code param is incorrect.'))
+  })
+
+  test('Should call with internal error', async () => {
+    const validateBillet = () => { throw new Error('') }
+
+    const sut = new BilletDecoded({ validateBillet })
+
+    const response = await sut.handle(requestMockMount(), responseMockMount())
+
+    expect(response).toMatchObject(serverError())
   })
 })
