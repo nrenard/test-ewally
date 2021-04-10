@@ -18,17 +18,17 @@ const responseMockMount = (): any => ({
 
 interface SutTypes {
   sut: BilletDecoded
-  validateBillet: () => any
+  validateDigitableLines: () => any
 }
 
 const makeSut = (): SutTypes => {
-  const validateBillet = () => true
+  const validateDigitableLines = () => true
 
-  const sut = new BilletDecoded({ validateBillet })
+  const sut = new BilletDecoded({ validateDigitableLines })
 
   return {
     sut,
-    validateBillet
+    validateDigitableLines
   }
 }
 
@@ -42,9 +42,9 @@ describe('BilletDecoded Controller', () => {
   })
 
   test('Should call Validation with incorrect value', async () => {
-    const validateBillet = () => false
+    const validateDigitableLines = () => false
 
-    const sut = new BilletDecoded({ validateBillet })
+    const sut = new BilletDecoded({ validateDigitableLines })
 
     const response = await sut.handle(requestMockMount(), responseMockMount())
 
@@ -52,9 +52,9 @@ describe('BilletDecoded Controller', () => {
   })
 
   test('Should call with internal error', async () => {
-    const validateBillet = () => { throw new Error('') }
+    const validateDigitableLines = () => { throw new Error('') }
 
-    const sut = new BilletDecoded({ validateBillet })
+    const sut = new BilletDecoded({ validateDigitableLines })
 
     const response = await sut.handle(requestMockMount(), responseMockMount())
 

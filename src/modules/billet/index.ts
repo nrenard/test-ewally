@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { validateBillet } from './validations'
+import { validateDigitableLines } from './validations'
 
 import { BilletDecodedController } from './controllers'
 
@@ -8,7 +8,7 @@ const routes = Router()
 
 const prefix = 'boleto'
 
-const billetDecodedController = new BilletDecodedController({ validateBillet })
+const billetDecodedController = new BilletDecodedController({ validateDigitableLines })
 
 routes.get(`/${prefix}/:code`, billetDecodedController.handle.bind(billetDecodedController))
 

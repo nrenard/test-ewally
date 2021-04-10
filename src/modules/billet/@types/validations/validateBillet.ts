@@ -1,1 +1,1 @@
-export type IValidateBillet = (code: string) => boolean
+export type IValidateDigitableLines = (code: string) => boolean

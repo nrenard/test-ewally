@@ -1,1 +1,1 @@
-export { default as validateBillet } from './validateBillet'
+export { default as validateDigitableLines } from './validateDigitableLines'

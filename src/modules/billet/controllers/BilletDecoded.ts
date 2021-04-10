@@ -1,22 +1,22 @@
 import { Request, Response } from 'express'
 
 import { IController } from '@/@types/protocols'
-import { IValidateBillet } from '@/modules/billet/@types'
+import { IValidateDigitableLines } from '@/modules/billet/@types'
 
 import { badRequest, ok, serverError } from '@/shared'
 
 export default class BilletDecoded implements IController {
-  private readonly validateBillet: IValidateBillet
+  private readonly validateDigitableLines: IValidateDigitableLines
 
-  constructor ({ validateBillet }) {
-    this.validateBillet = validateBillet
+  constructor ({ validateDigitableLines }) {
+    this.validateDigitableLines = validateDigitableLines
   }
 
   public async handle (req: Request, res: Response): Promise<Response> {
     try {
       const { code } = req.params
 
-      const isValid = this.validateBillet(code)
+      const isValid = this.validateDigitableLines(code)
 
       if (!isValid) return res.adaptorResponse(badRequest('Code param is incorrect.'))
 
