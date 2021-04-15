@@ -1,11 +1,22 @@
-import { BILLET_TYPES } from '@/modules/billet/constants'
+import { cutText } from '@/shared'
 
-import bankBond from './bankBond'
-// import dealershipPayment from './dealershipPayment'
+import { takeDueDate } from '../index'
 
-const MAP_FUNCTIONS = new Map()
+interface IDetails {
+  expirationDate: string
+  amount: string
+}
 
-MAP_FUNCTIONS.set(BILLET_TYPES.BANK_BOND, bankBond)
-// MAP_FUNCTIONS.set(BILLET_TYPES.DEALERSHIP_PAYMENT, dealershipPayment)
+export default (barcode: string): IDetails => {
+  const dueDateFactor = cutText(barcode, 5, 9)
+  const cents = cutText(barcode, 17, 19)
+  const dolar = cutText(barcode, 9, 17)
 
-export default (type: keyof typeof BILLET_TYPES) => MAP_FUNCTIONS.get(type)
+  const amount = `${Number(dolar)}.${cents}`
+  const expirationDate = takeDueDate(Number(dueDateFactor))
+
+  return {
+    amount,
+    expirationDate
+  }
+}

@@ -1,40 +1,33 @@
 import { IReturnHandle, IReturnValid, IValidAndReturnDetails } from '@/modules/billet/@types'
 
-import { validBillet } from '@/modules/billet/helpers'
-
-import { BILLET_TYPES } from '../../constants'
-
-const validDealershipPayment = validBillet(BILLET_TYPES.DEALERSHIP_PAYMENT)
-const validBankBond = validBillet(BILLET_TYPES.BANK_BOND)
+import { validBillet, takeBarcodeDetails } from '@/modules/billet/helpers'
 
 export default class ValidAndReturnDetails implements IValidAndReturnDetails {
-  private readonly digitableLine: string
-
-  constructor (code: string) {
-    this.digitableLine = code
-  }
+  private digitableLine: string
 
   private isValid (): IReturnValid {
-    let barcode: string
-
-    barcode = validDealershipPayment(this.digitableLine)
-    if (barcode) return { type: BILLET_TYPES.DEALERSHIP_PAYMENT, barcode }
-
-    barcode = validBankBond(this.digitableLine)
-    if (barcode) return { type: BILLET_TYPES.BANK_BOND, barcode }
+    const barcode = validBillet(this.digitableLine)
+    if (barcode) return barcode
 
     return null
   }
 
-  public handle (): IReturnHandle {
+  public handle (code: string): IReturnHandle {
+    this.digitableLine = code
+
     const barCode = this.isValid()
 
     if (!barCode) return null
 
+    const {
+      amount,
+      expirationDate
+    } = takeBarcodeDetails(barCode)
+
     return {
-      barCode: barCode.barcode,
-      amount: 'string',
-      expirationDate: 'string'
+      barCode,
+      amount,
+      expirationDate
     }
   }
 }

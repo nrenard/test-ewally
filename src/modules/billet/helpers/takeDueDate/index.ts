@@ -1,11 +1,15 @@
-import { BILLET_TYPES } from '@/modules/billet/constants'
+const DATE_BASE = '10-07-1997'
 
-import bankBond from './bankBond'
-import dealershipPayment from './dealershipPayment'
+export default (dueDateFactor: number): string => {
+  const dateBase = new Date(DATE_BASE)
 
-const MAP_FUNCTIONS = new Map()
+  const dueDate = dateBase.setDate(dateBase.getDate() + dueDateFactor)
 
-MAP_FUNCTIONS.set(BILLET_TYPES.BANK_BOND, bankBond)
-MAP_FUNCTIONS.set(BILLET_TYPES.DEALERSHIP_PAYMENT, dealershipPayment)
+  const date = new Date(dueDate)
 
-export default (type: keyof typeof BILLET_TYPES) => MAP_FUNCTIONS.get(type)
+  const year = date.getFullYear()
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+
+  return `${year}-${month}-${day}`
+}
