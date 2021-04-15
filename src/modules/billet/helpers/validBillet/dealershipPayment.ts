@@ -32,7 +32,7 @@ export default (digitableLine: string) => {
     const sumDigits = String(calculateDv(barcodeNoDv))
 
     if (dv === sumDigits) {
-      return cutText(barcodeNoDv, 0, 44)
+      return cutText(digitableLine, 0, 44)
     }
   }
 

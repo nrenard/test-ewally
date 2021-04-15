@@ -17,7 +17,6 @@ export default class BilletDecoded implements IController {
       const { code } = req.params
 
       const isValid = this.validateDigitableLines(code)
-
       if (!isValid) return res.adaptorResponse(badRequest('Code param is incorrect.'))
 
       return res.adaptorResponse(ok('ok'))
