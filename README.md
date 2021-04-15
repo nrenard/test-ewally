@@ -7,7 +7,7 @@
 - Typescript
 - Node
 
-## Esta é árvore de código fonte:
+## Árvore do código fonte:
 
 ```
   src
@@ -45,7 +45,25 @@ Requisitos para rodar o projeto nodeJS >= 14. Clonar repositório, entrar na pas
   <b>Rodar cobertura de testes</b>
 
   > `npm run test:ci`
+
+  <b>Rodar testes verbosos</b>
+
+  > `npm run test:verbose`
+
+  <b>Rodar testes unitários</b>
+
+  > `npm run test:unit`
+
+  <b>Rodar testes de integração</b>
+
+  > `npm run test:integration`
+
+  <b>Rodar testes de arquigos staged</b>
+
+  > `npm run test:staged`
 </details>
+
+<br/>
 
 <details>
   <summary>
