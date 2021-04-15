@@ -1,8 +1,10 @@
+import { digitableLineSuccess } from '@/__mocks__'
+
 import validateDigitableLines from './validateDigitableLines'
 
 describe('validateDigitableLines Validations', () => {
   test('Should call validateDigitableLines with correct value', async () => {
-    const isValid = validateDigitableLines('21290001192110001210904475617405975870000002000')
+    const isValid = validateDigitableLines(digitableLineSuccess)
     expect(isValid).toBe(true)
   })
 

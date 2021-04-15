@@ -8,22 +8,22 @@ const config: any = {
 
   clearMocks: true,
 
-  // coveragePathIgnorePatterns: [
-  //   "/node_modules/"
-  // ],
+  coveragePathIgnorePatterns: [
+    "<rootDir>/node_modules/",
+    "<rootDir>/src/__mocks__",
+    "<rootDir>/src/__tests__",
+    "<rootDir>/src/index.ts",
+    "<rootDir>/src/documentation",
+    "<rootDir>/src/@types",
+    "<rootDir>/src/modules/billet/@types",
+  ],
 
   coverageProvider: 'v8',
 
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
 
   coverageDirectory: 'coverage',
-
-  // coverageReporters: [
-  //   "json",
-  //   "text",
-  //   "lcov",
-  //   "clover"
-  // ],
+  
   testEnvironment: 'node',
   transform: {
     '.+\\.ts$': 'ts-jest'
@@ -32,14 +32,14 @@ const config: any = {
     "@/(.*)": '<rootDir>/src/$1'
   },
 
-  // coverageThreshold: {
-  //   global: {
-  //     branches: 100,
-  //     functions: 100,
-  //     lines: 100,
-  //     statements: 100,
-  //   },
-  // }
+  coverageThreshold: {
+    global: {
+      branches: 100,
+      functions: 100,
+      lines: 100,
+      statements: 100,
+    },
+  }
 }
 
 export default config

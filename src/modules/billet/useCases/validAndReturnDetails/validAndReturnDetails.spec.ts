@@ -1,3 +1,5 @@
+import { digitableLineSuccess, digitableLineError, barcode } from '@/__mocks__'
+
 import ValidAndReturnDetails from './index'
 
 describe('ValidAndReturnDetails UseCases', () => {
@@ -5,7 +7,7 @@ describe('ValidAndReturnDetails UseCases', () => {
     test('Should call Validation with incorrect value', async () => {
       const validAndReturnDetails = new ValidAndReturnDetails()
 
-      const result = validAndReturnDetails.handle('00190500940144816069068093103143373700000000100')
+      const result = validAndReturnDetails.handle(digitableLineError)
 
       expect(result).toBe(null)
     })
@@ -13,10 +15,10 @@ describe('ValidAndReturnDetails UseCases', () => {
     test('Should call Validation with correct value', async () => {
       const validAndReturnDetails = new ValidAndReturnDetails()
 
-      const result = validAndReturnDetails.handle('00190500940144816069068093503143373700000000100')
+      const result = validAndReturnDetails.handle(digitableLineSuccess)
 
       expect(result).toMatchObject({
-        barCode: '00193373700000001000500940144816060680935031',
+        barCode: barcode,
         amount: '1.00',
         expirationDate: '2007-12-31'
       })

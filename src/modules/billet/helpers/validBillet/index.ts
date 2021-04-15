@@ -20,9 +20,6 @@ const calculateDv = (digits: string) => {
     const result = digit * multiple
     sum += result
 
-    console.log(`${digit} x ${multiple} = ${result}`)
-    console.log(`sum = ${sum}`)
-
     if (multipleIndex === 7) multipleIndex = -1
   }
 

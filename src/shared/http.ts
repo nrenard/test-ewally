@@ -7,7 +7,7 @@ export const badRequest = (error: string): IHttpResponse => ({
 
 export const serverError = (): IHttpResponse => ({
   statusCode: 500,
-  body: { error: 'Erro interno' }
+  body: { error: 'Erro interno.' }
 })
 
 export const ok = (data: any): IHttpResponse => ({

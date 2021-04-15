@@ -15,7 +15,7 @@ describe('http Shareds', () => {
     const response = serverError()
     expect(response).toMatchObject({
       body: {
-        error: 'Erro interno'
+        error: 'Erro interno.'
       },
       statusCode: 500
     })

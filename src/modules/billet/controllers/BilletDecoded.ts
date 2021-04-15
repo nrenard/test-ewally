@@ -27,7 +27,6 @@ export default class BilletDecoded implements IController {
 
       return res.adaptorResponse(ok(details))
     } catch (err) {
-      console.error(err)
       return res.adaptorResponse(serverError())
     }
   }
