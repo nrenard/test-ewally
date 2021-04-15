@@ -26,7 +26,7 @@
 
 ## Instalação
 
-Requisitos para rodar o projeto nodeJS >= 12. Clonar repositório, entrar na pasta e instalar suas dependências com o comando `yarn` ou `npm install` e copiar o arquivo `.env.example` para `.env`.
+Requisitos para rodar o projeto nodeJS >= 14. Clonar repositório, entrar na pasta e instalar suas dependências com o comando `yarn` ou `npm install` e copiar o arquivo `.env.example` para `.env`.
 
 
 ## Scripts
